@@ -1,10 +1,13 @@
 package com.acme.statusmgr;
 
 import com.acme.statusmgr.beans.ServerStatus;
+import org.slf4j.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -35,8 +38,20 @@ public class StatusController {
      * @return a ServerStatus object containing the info to be returned to the requestor
      */
     @RequestMapping("/status")
-    public ServerStatus getStatus(@RequestParam(value = "name", defaultValue = "Anonymous") String name) {
+    public ServerStatus getStatus(@RequestParam(value = "name", defaultValue = "Anonymous") String name, @RequestParam(required = false) List<String> details) {
+        if (details != null) {
+            Logger logger = LoggerFactory.getLogger("StuffImInterestedIn");
+            logger.info("details provided: " + details);
+        }
+
+
+
+
         return new ServerStatus(counter.incrementAndGet(),
                 String.format(template, name));
     }
+
+
+
+
 }
