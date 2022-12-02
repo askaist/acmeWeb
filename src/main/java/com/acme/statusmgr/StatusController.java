@@ -31,6 +31,7 @@ public class StatusController {
     protected static final String template = "Server Status requested by %s";
     protected final AtomicLong counter = new AtomicLong();
 
+
     /**
      * Process a request for server status information
      *
@@ -52,8 +53,9 @@ public class StatusController {
             @RequestParam(value = "name", defaultValue = "Anonymous") String name,
             @RequestParam(value = "details", defaultValue = "") List<String> details) {
 
-        return new ServerStatus(counter.incrementAndGet(),
-                String.format(template, name));
+        ServerStatus serverStatus = new ServerStatus(counter.incrementAndGet(), String.format(template, name));
+
+        return serverStatus;
     }
 
 

@@ -2,6 +2,8 @@ package com.acme.statusmgr.beans;
 
 import com.acme.servermgr.ServerManager;
 
+import java.util.List;
+
 /**
  * A POJO that represents Server Status and can be returned as the result of a request.
  */
@@ -66,6 +68,12 @@ public class ServerStatus {
      */
     public Integer getRequestCost() {
         return requestCost;
+    }
+
+    public static void getServerStatus(List<String> details) {
+        for (String detail: details) {
+            System.out.println(detail);
+        }
     }
 
 }
