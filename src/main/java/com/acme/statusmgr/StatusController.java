@@ -43,13 +43,21 @@ public class StatusController {
             Logger logger = LoggerFactory.getLogger("StuffImInterestedIn");
             logger.info("details provided: " + details);
         }
+        return new ServerStatus(counter.incrementAndGet(),
+                String.format(template, name));
+    }
 
-
-
+    @RequestMapping("/status/detailed")
+    public ServerStatus getDetailed(
+            @RequestParam(value = "name", defaultValue = "Anonymous") String name,
+            @RequestParam(value = "details", defaultValue = "") List<String> details) {
 
         return new ServerStatus(counter.incrementAndGet(),
                 String.format(template, name));
     }
+
+
+
 
 
 
