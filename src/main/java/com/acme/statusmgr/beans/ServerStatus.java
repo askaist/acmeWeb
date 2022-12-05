@@ -1,13 +1,14 @@
 package com.acme.statusmgr.beans;
 
 import com.acme.servermgr.ServerManager;
+import com.acme.statusmgr.DetailsInformationInterface;
 
 import java.util.List;
 
 /**
  * A POJO that represents Server Status and can be returned as the result of a request.
  */
-public class ServerStatus {
+public class ServerStatus implements ServerStatusInterface {
 
 
     private long id;                // Unique identifier of request, sequential number
@@ -76,4 +77,9 @@ public class ServerStatus {
         }
     }
 
+
+    @Override
+    public void setDetailsInformation(DetailsInformationInterface detailsInformation) {
+
+    }
 }

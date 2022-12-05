@@ -1,6 +1,8 @@
 package com.acme.statusmgr;
 
+import com.acme.statusmgr.beans.AvailableProcessors;
 import com.acme.statusmgr.beans.ServerStatus;
+import com.acme.statusmgr.beans.ServerStatusInterface;
 import org.slf4j.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,9 +51,12 @@ public class StatusController {
     }
 
     @RequestMapping("/status/detailed")
-    public ServerStatus getDetailed(
+    public ServerStatusInterface getDetailed(
             @RequestParam(value = "name", defaultValue = "Anonymous") String name,
             @RequestParam(value = "details", defaultValue = "") List<String> details) {
+
+        ServerStatusInterface serverStatustest = new AvailableProcessors(new ServerStatus(counter.incrementAndGet(), String.format(template, name)));
+
 
         ServerStatus serverStatus = new ServerStatus(counter.incrementAndGet(), String.format(template, name));
 

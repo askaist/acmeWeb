@@ -8,6 +8,7 @@ package com.acme.servermgr;
  */
 public class ServerManager {
 
+
     /**
      * Get the status of this server
      * @return a descriptive string about the servers status

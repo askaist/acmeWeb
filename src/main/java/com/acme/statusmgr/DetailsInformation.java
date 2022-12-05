@@ -21,7 +21,7 @@ public class DetailsInformation implements DetailsInformationInterface {
 
     @Override
     public String getJREVersion() {
-        return "jre version";
+        return String.valueOf(Runtime.version());
     }
 
     @Override

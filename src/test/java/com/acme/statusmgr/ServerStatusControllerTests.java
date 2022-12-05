@@ -34,6 +34,8 @@ public class ServerStatusControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
+
+
     @Test
     public void noNameParamShouldReturnDefaultMessage() throws Exception {
 
