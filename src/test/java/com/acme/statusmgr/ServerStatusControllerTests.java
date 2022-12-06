@@ -80,4 +80,14 @@ public class ServerStatusControllerTests {
                 .andExpect(jsonPath("$.statusDesc").value("Server is up, and there are 4 processors available, and there are 4 processors available"));
     }
 
+    @Test
+    public void invalidDetails() throws Exception {
+        this.mockMvc.perform(get("http://localhost:8080/server/status/detailed?name=Yankel&details=availableProcessors,junkERROR"))
+                .andDo(print()).andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.contentHeader").value("Server Status requested by Yankel"))
+                .andExpect(jsonPath("$.requestCost").value(7))
+                .andExpect(jsonPath("$.statusDesc").value("Server is up, and there are 4 processors available, and there are 4 processors available"));
+    }
+
+
 }

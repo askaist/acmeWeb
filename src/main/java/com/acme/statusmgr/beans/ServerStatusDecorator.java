@@ -5,16 +5,29 @@ import com.acme.statusmgr.DetailsInformationInterface;
 public abstract class ServerStatusDecorator implements ServerStatusInterface {
 
 
-    ServerStatus serverStatus;
+    ServerStatusInterface serverStatus;
     DetailsInformationInterface detailsInformation;
 
 
-    public ServerStatusDecorator(ServerStatus serverStatus) {
+    public ServerStatusDecorator(ServerStatusInterface serverStatus) {
 
         this.serverStatus = serverStatus;
     }
 
     public void setDetailsInformation(DetailsInformationInterface detailsInformation) {
         this.detailsInformation = detailsInformation;
+    }
+
+
+    @Override
+    public long getId() {
+        return serverStatus.getId();
+    }
+
+
+
+    @Override
+    public Integer getRequestCost() {
+        return serverStatus.getRequestCost();
     }
 }

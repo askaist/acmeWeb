@@ -71,15 +71,14 @@ public class ServerStatus implements ServerStatusInterface {
         return requestCost;
     }
 
-    public static void getServerStatus(List<String> details) {
-        for (String detail: details) {
-            System.out.println(detail);
-        }
-    }
+
 
 
     @Override
     public void setDetailsInformation(DetailsInformationInterface detailsInformation) {
+
+
+
 
     }
 }

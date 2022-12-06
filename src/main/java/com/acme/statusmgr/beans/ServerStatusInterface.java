@@ -3,8 +3,18 @@ package com.acme.statusmgr.beans;
 import com.acme.statusmgr.DetailsInformationInterface;
 
 public interface ServerStatusInterface {
-    void setDetailsInformation(DetailsInformationInterface detailsInformation);
 
+
+
+
+
+    public abstract void setDetailsInformation(DetailsInformationInterface detailsInformation);
+
+    abstract long getId();
+
+    abstract String getStatusDesc();
+
+    abstract Integer getRequestCost();
 
 
 
