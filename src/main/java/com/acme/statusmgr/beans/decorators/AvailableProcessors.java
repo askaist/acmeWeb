@@ -1,4 +1,6 @@
-package com.acme.statusmgr.beans;
+package com.acme.statusmgr.beans.decorators;
+
+import com.acme.statusmgr.beans.ServerStatusInterface;
 
 public class AvailableProcessors extends ServerStatusDecorator{
 
@@ -11,7 +13,13 @@ public class AvailableProcessors extends ServerStatusDecorator{
 
 
     public String getStatusDesc() {
+        System.out.println(serverStatus.getStatusDesc());
         return serverStatus.getStatusDesc() + String.format(template, detailsInformation.getAvailableProcessors());
+    }
+
+    @Override
+    public Integer getRequestCost() {
+        return serverStatus.getRequestCost() + 3;
     }
 
 

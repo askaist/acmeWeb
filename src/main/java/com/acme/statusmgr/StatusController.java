@@ -1,13 +1,14 @@
 package com.acme.statusmgr;
 
 import com.acme.statusmgr.beans.*;
+import com.acme.statusmgr.beans.decorators.ServerStatusDecorator;
+import com.acme.statusmgr.detailsInformationManager.DetailsInformation;
 import org.slf4j.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -53,14 +54,16 @@ public class StatusController {
             @RequestParam(value = "name", defaultValue = "Anonymous") String name,
             @RequestParam(value = "details", defaultValue = "") List<String> details) {
 
-
-        ServerStatusInterface serverStatustest = new AvailableProcessors(new ServerStatus(counter.incrementAndGet(), String.format(template, name)));
-
-
-        ServerStatus serverStatus = new ServerStatus(counter.incrementAndGet(), String.format(template, name));
+        ServerStatusDecorator.setDetailsInformation(new DetailsInformation());
+//        ServerStatusInterface serverStatustest = new AvailableProcessors(new ServerStatus(counter.incrementAndGet(), String.format(template, name)));
 
 
-        return serverStatustest;
+
+        ServerStatusInterface serverStatus = new ServerStatus(counter.incrementAndGet(), String.format(template, name));
+        serverStatus = ServerStatusDecorator.decorateServerStatus(serverStatus, details);
+
+
+        return serverStatus;
     }
 
 

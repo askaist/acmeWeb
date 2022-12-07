@@ -1,20 +1,17 @@
 package com.acme.statusmgr.beans;
 
-import com.acme.statusmgr.DetailsInformationInterface;
-
 public interface ServerStatusInterface {
 
 
 
 
+     long getId();
 
-    public abstract void setDetailsInformation(DetailsInformationInterface detailsInformation);
+     String getStatusDesc();
 
-    abstract long getId();
+     Integer getRequestCost();
 
-    abstract String getStatusDesc();
-
-    abstract Integer getRequestCost();
+    public String getContentHeader();
 
 
 

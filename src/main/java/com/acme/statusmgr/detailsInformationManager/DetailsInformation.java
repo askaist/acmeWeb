@@ -1,4 +1,4 @@
-package com.acme.statusmgr;
+package com.acme.statusmgr.detailsInformationManager;
 
 public class DetailsInformation implements DetailsInformationInterface {
 

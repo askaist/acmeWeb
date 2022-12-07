@@ -1,4 +1,6 @@
-package com.acme.statusmgr.beans;
+package com.acme.statusmgr.beans.decorators;
+
+import com.acme.statusmgr.beans.ServerStatusInterface;
 
 public class JREVersion extends ServerStatusDecorator{
 
@@ -12,5 +14,10 @@ public class JREVersion extends ServerStatusDecorator{
 
     public String getStatusDesc() {
         return serverStatus.getStatusDesc() + String.format(template, detailsInformation.getJREVersion());
+    }
+
+    @Override
+    public Integer getRequestCost() {
+        return serverStatus.getRequestCost() + 19;
     }
 }
