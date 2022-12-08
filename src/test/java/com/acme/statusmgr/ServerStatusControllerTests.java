@@ -79,7 +79,7 @@ public class ServerStatusControllerTests {
         this.mockMvc.perform(get("/server/status/detailed?name=Yankel&details=availableProcessors,freeJVMMemory,totalJVMMemory,jreVersion,tempLocation"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.contentHeader").value("Server Status requested by Yankel"))
-                .andExpect(jsonPath("$.requestCost").value(4))
+                .andExpect(jsonPath("$.requestCost").value(72))
                 .andExpect(jsonPath("$.statusDesc").value("Server is up, and there are 4 processors available, and there are 127268272 bytes of JVM memory free, and there is a total of 159383552 bytes of JVM memory, and the JRE version is 15.0.2+7-27, and the server's temp file location is M:\\\\AppData\\\\Local\\\\Temp"));
     }
 
@@ -88,16 +88,25 @@ public class ServerStatusControllerTests {
         this.mockMvc.perform(get("/server/status/detailed?details=availableProcessors&name=Yankel"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.contentHeader").value("Server Status requested by Yankel"))
-                .andExpect(jsonPath("$.requestCost").value(7))
-                .andExpect(jsonPath("$.statusDesc").value("Server is up, and there are 4 processors available, and there are 4 processors available"));
+                .andExpect(jsonPath("$.requestCost").value(4))
+                .andExpect(jsonPath("$.statusDesc").value("Server is up, and there are 4 processors available"));
     }
 
     @Test
     public void InvalidDetails() throws Exception {
         this.mockMvc.perform(get("/server/status/detailed?name=Yankel&details=availableProcessors,junkERROR"))
                 .andDo(print()).andExpect(status().isBadRequest())
-                .andExpect(status().reason(is("invalid detail requested")))
-                .andExpect(result -> Assertions.assertEquals("Invalid details option: junkERROR", result.getResolvedException().getMessage()));
+                .andExpect(status().reason(is("Invalid details option: junkERROR")))
+                .andExpect(result -> Assertions.assertEquals("400 BAD_REQUEST \"Invalid details option: junkERROR\"", result.getResolvedException().getMessage()));
+    }
+
+    @Test
+    public void duplicateDetail() throws Exception {
+        this.mockMvc.perform(get("/server/status/detailed?details=availableProcessors,availableProcessors&name=Yankel"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.contentHeader").value("Server Status requested by Yankel"))
+                .andExpect(jsonPath("$.requestCost").value(7))
+                .andExpect(jsonPath("$.statusDesc").value("Server is up, and there are 4 processors available, and there are 4 processors available"));
     }
 
 

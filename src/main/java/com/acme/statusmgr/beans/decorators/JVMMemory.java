@@ -12,6 +12,7 @@ public class JVMMemory extends ServerStatusDecorator{
 
 
 
+    @Override
     public String getStatusDesc() {
         return serverStatus.getStatusDesc() + String.format(template, detailsInformation.getJVMMemory());
     }

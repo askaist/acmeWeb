@@ -12,15 +12,19 @@ public class AvailableProcessors extends ServerStatusDecorator{
 
 
 
+    @Override
+    public Integer getRequestCost() {
+        return serverStatus.getRequestCost() + 3;
+    }
+
+
+    @Override
     public String getStatusDesc() {
         System.out.println(serverStatus.getStatusDesc());
         return serverStatus.getStatusDesc() + String.format(template, detailsInformation.getAvailableProcessors());
     }
 
-    @Override
-    public Integer getRequestCost() {
-        return serverStatus.getRequestCost() + 3;
-    }
+
 
 
 

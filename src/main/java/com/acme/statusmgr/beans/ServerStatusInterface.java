@@ -11,7 +11,7 @@ public interface ServerStatusInterface {
 
      Integer getRequestCost();
 
-    public String getContentHeader();
+     String getContentHeader();
 
 
 

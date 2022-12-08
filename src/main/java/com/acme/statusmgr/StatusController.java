@@ -3,6 +3,7 @@ package com.acme.statusmgr;
 import com.acme.statusmgr.beans.*;
 import com.acme.statusmgr.beans.decorators.ServerStatusDecorator;
 import com.acme.statusmgr.detailsInformationManager.DetailsInformation;
+import com.acme.statusmgr.detailsInformationManager.MockDetailsInformation;
 import org.slf4j.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,8 +56,6 @@ public class StatusController {
             @RequestParam(value = "details", defaultValue = "") List<String> details) {
 
         ServerStatusDecorator.setDetailsInformation(new DetailsInformation());
-//        ServerStatusInterface serverStatustest = new AvailableProcessors(new ServerStatus(counter.incrementAndGet(), String.format(template, name)));
-
 
 
         ServerStatusInterface serverStatus = new ServerStatus(counter.incrementAndGet(), String.format(template, name));

@@ -13,6 +13,7 @@ public class TotalJVMMemory extends ServerStatusDecorator{
 
 
 
+    @Override
     public String getStatusDesc() {
         return serverStatus.getStatusDesc() + String.format(template, detailsInformation.getTotalJVMMemory());
     }
