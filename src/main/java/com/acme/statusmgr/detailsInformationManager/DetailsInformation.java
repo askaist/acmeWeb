@@ -1,5 +1,10 @@
 package com.acme.statusmgr.detailsInformationManager;
 
+/**
+ * Utilized Runtime and System to get information unique to the
+ * users computer.
+ */
+
 public class DetailsInformation implements DetailsInformationInterface {
 
     Runtime runtime = Runtime.getRuntime();

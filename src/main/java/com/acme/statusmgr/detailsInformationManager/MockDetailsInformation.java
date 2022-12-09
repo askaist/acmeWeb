@@ -1,5 +1,9 @@
 package com.acme.statusmgr.detailsInformationManager;
 
+/**
+ * Gets predetermined values that is to be used for testing
+ * in order to maintain constant results.
+ */
 public class MockDetailsInformation implements DetailsInformationInterface{
     @Override
     public int getAvailableProcessors() {
