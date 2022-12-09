@@ -50,12 +50,23 @@ public class StatusController {
                 String.format(template, name));
     }
 
+
+    /**
+     * process request for serverStatus info and details information.
+     * First sets the details' facade to be used. Then creates a basic ServerStatus object.
+     * Next decorates the object based the list inputted. Lastly returns the fully decorated
+     * ServerStatus.
+     *
+     * @param name name optional param identifying the requester
+     * @param details list of details requested by the user
+     * @return fully decorated ServerStatus object containing all the info requested
+     */
     @RequestMapping("/status/detailed")
     public ServerStatusInterface getDetailed(
             @RequestParam(value = "name", defaultValue = "Anonymous") String name,
             @RequestParam(value = "details", defaultValue = "") List<String> details) {
 
-        ServerStatusDecorator.setDetailsInformation(new MockDetailsInformation());
+        ServerStatusDecorator.setDetailsInformation(new DetailsInformation());
 
 
         ServerStatusInterface serverStatus = new ServerStatus(counter.incrementAndGet(), String.format(template, name));
