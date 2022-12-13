@@ -66,7 +66,7 @@ public class StatusController {
             @RequestParam(value = "name", defaultValue = "Anonymous") String name,
             @RequestParam(value = "details", defaultValue = "") List<String> details) {
 
-        ServerStatusDecorator.setDetailsInformation(new DetailsInformation());
+
 
 
         ServerStatusInterface serverStatus = new ServerStatus(counter.incrementAndGet(), String.format(template, name));

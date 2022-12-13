@@ -1,5 +1,6 @@
 package com.acme.statusmgr.beans.decorators;
 
+import com.acme.statusmgr.detailsInformationManager.DetailsInformation;
 import com.acme.statusmgr.detailsInformationManager.DetailsInformationInterface;
 import com.acme.statusmgr.beans.ServerStatusInterface;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ public abstract class ServerStatusDecorator implements ServerStatusInterface {
 
 
     ServerStatusInterface serverStatus;
-    static DetailsInformationInterface detailsInformation;
+    static DetailsInformationInterface detailsInformation = new DetailsInformation();
 
 
     public ServerStatusDecorator(ServerStatusInterface serverStatus) {
