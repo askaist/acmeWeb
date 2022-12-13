@@ -1,13 +1,15 @@
 package com.acme.statusmgr;
 
-import com.acme.statusmgr.beans.ServerStatus;
+import com.acme.statusmgr.beans.*;
+import com.acme.statusmgr.beans.decorators.ServerStatusDecorator;
+import com.acme.statusmgr.detailsInformationManager.DetailsInformation;
+import com.acme.statusmgr.detailsInformationManager.MockDetailsInformation;
 import org.slf4j.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -31,6 +33,7 @@ public class StatusController {
     protected static final String template = "Server Status requested by %s";
     protected final AtomicLong counter = new AtomicLong();
 
+
     /**
      * Process a request for server status information
      *
@@ -43,13 +46,38 @@ public class StatusController {
             Logger logger = LoggerFactory.getLogger("StuffImInterestedIn");
             logger.info("details provided: " + details);
         }
-
-
-
-
         return new ServerStatus(counter.incrementAndGet(),
                 String.format(template, name));
     }
+
+
+    /**
+     * process request for serverStatus info and details information.
+     * First sets the details' facade to be used. Then creates a basic ServerStatus object.
+     * Next decorates the object based the list inputted. Lastly returns the fully decorated
+     * ServerStatus.
+     *
+     * @param name name optional param identifying the requester
+     * @param details list of details requested by the user
+     * @return fully decorated ServerStatus object containing all the info requested
+     */
+    @RequestMapping("/status/detailed")
+    public ServerStatusInterface getDetailed(
+            @RequestParam(value = "name", defaultValue = "Anonymous") String name,
+            @RequestParam(value = "details", defaultValue = "") List<String> details) {
+
+
+
+
+        ServerStatusInterface serverStatus = new ServerStatus(counter.incrementAndGet(), String.format(template, name));
+        serverStatus = ServerStatusDecorator.decorateServerStatus(serverStatus, details);
+
+
+        return serverStatus;
+    }
+
+
+
 
 
 

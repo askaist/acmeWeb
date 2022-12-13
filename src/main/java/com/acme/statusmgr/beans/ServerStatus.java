@@ -5,7 +5,7 @@ import com.acme.servermgr.ServerManager;
 /**
  * A POJO that represents Server Status and can be returned as the result of a request.
  */
-public class ServerStatus {
+public class ServerStatus implements ServerStatusInterface {
 
 
     private long id;                // Unique identifier of request, sequential number
@@ -67,5 +67,9 @@ public class ServerStatus {
     public Integer getRequestCost() {
         return requestCost;
     }
+
+
+
+
 
 }
